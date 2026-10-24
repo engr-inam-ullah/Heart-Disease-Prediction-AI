@@ -1,0 +1,8 @@
+
+users.db
+.env
+.venv/
+venv/
+__pycache__/
+.ipynb_checkpoints/
+catboost_info/

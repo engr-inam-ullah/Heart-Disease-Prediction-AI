@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login | HeartCare AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <symbol id="heart-ecg" viewBox="0 0 64 60">
+            <path d="M32 56C10 40 2 28 2 17 2 8 9 2 17 2c6 0 11 3 15 9 4-6 9-9 15-9 8 0 15 6 15 15 0 11-8 23-30 39z"
+                fill="#e11d48" />
+            <path d="M6 28h13l5-10 8 20 6-14 4 4h16" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </symbol>
+    </svg>
+
+    <img src="images/heart-background.png" alt="" class="bg-heart">
+
+    <header class="topbar">
+        <a class="brand" href="/">
+            <svg class="logo">
+                <use href="#heart-ecg" />
+            </svg>
+            <span class="brand-text">
+                <strong>HeartCare <em>AI</em></strong>
+                <small>Smarter Insights. Healthier Hearts.</small>
+            </span>
+        </a>
+        <nav>
+            <a href="/"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M12 3 2 12h3v8h5v-6h4v6h5v-8h3z" />
+                </svg>Home</a>
+            <a href="/prediction"><svg width="20" height="19">
+                    <use href="#heart-ecg" />
+                </svg>Prediction</a>
+        </nav>
+    </header>
+
+    <main class="layout">
+        <div class="spacer"></div>
+
+        <section class="card" aria-labelledby="t">
+            <svg class="card-heart">
+                <use href="#heart-ecg" />
+            </svg>
+            <h1 id="t">Patient <span>Login</span></h1>
+            <p class="lead">Log in to continue to your heart health prediction.</p>
+
+            <div id="error" class="error" role="alert" hidden></div>
+
+            <form id="loginForm" action="/login" method="POST" novalidate>
+                <label for="username">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"
+                        stroke-linecap="round">
+                        <circle cx="12" cy="8" r="4" />
+                        <path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" />
+                    </svg>
+                    Username or email
+                </label>
+                <input type="text" id="username" name="username" placeholder="Enter username or email"
+                    autocomplete="username" required>
+
+                <label for="password">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="4" y="10" width="16" height="11" rx="2" />
+                        <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+                    </svg>
+                    Password
+                </label>
+                <div class="pw">
+                    <input type="password" id="password" name="password" placeholder="Enter password"
+                        autocomplete="current-password" required>
+                    <button type="button" id="toggle" class="toggle" aria-label="Show password">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                            <circle cx="12" cy="12" r="3" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="row">
+                    <label class="check"><input type="checkbox" name="remember"> Remember me</label>
+                    <a href="#" class="link">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn">Log in</button>
+            </form>
+            <p class="foot">New here? <a href="/signup" class="link">Create an account</a></p>
+        </section>
+
+        <aside class="side">
+            <div class="feat top">
+                <span class="ico red"><svg width="30" height="28">
+                        <use href="#heart-ecg" />
+                    </svg></span>
+                <div>
+                    <h3>Better Data<br>for Healthier Lives</h3>
+                    <p>Our AI model analyzes key health indicators to provide insights into your heart health risk.</p>
+                </div>
+            </div>
+            <div class="feat">
+                <span class="ico"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#e11d48"
+                        stroke-width="1.8" stroke-linecap="round">
+                        <circle cx="12" cy="12" r="8" />
+                        <path d="M12 4v16M8 9h4M12 15h4" />
+                    </svg></span>
+                <div>
+                    <h3>Machine Learning</h3>
+                    <p>Powered by a trained logistic regression model</p>
+                </div>
+            </div>
+            <div class="feat">
+                <span class="ico"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#e11d48"
+                        stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round">
+                        <path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z" />
+                        <path d="m9 12 2 2 4-4" />
+                    </svg></span>
+                <div>
+                    <h3>Secure &amp; Private</h3>
+                    <p>Your data is safe with us</p>
+                </div>
+            </div>
+            <div class="feat">
+                <span class="ico"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#e11d48"
+                        stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round">
+                        <path d="m2 9 10-5 10 5-10 5z" />
+                        <path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5" />
+                    </svg></span>
+                <div>
+                    <h3>Educational Purpose</h3>
+                    <p>Not a medical diagnosis.</p>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <script>
+        const pw = document.getElementById('password'), tg = document.getElementById('toggle'),
+            err = document.getElementById('error');
+        tg.addEventListener('click', () => {
+            const show = pw.type === 'password';
+            pw.type = show ? 'text' : 'password';
+            tg.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+            tg.classList.toggle('on', show);
+        });
+        document.getElementById('loginForm').addEventListener('submit', e => {
+            if (!document.getElementById('username').value.trim() || !pw.value) {
+                e.preventDefault();
+                err.textContent = 'Enter both your username and password.';
+                err.hidden = false;
+            }
+        });
+        if (new URLSearchParams(location.search).get('error')) {
+            err.textContent = 'Wrong username or password. Try again.';
+            err.hidden = false;
+        }
+    </script>
+</body>
+
+</html>

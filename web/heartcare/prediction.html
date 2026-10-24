@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Heart Disease Prediction | HeartCare AI</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+  <!-- Reusable heart + pulse logo -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="hcGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ff4a6e" />
+        <stop offset="1" stop-color="#e00d44" />
+      </linearGradient>
+      <symbol id="hcLogo" viewBox="0 0 100 90">
+        <path
+          d="M50 87C21 64 3 46 3 27 3 13 14 3 27 3c10 0 18 6 23 15C55 9 63 3 73 3c13 0 24 10 24 24 0 19-18 37-47 60z"
+          fill="url(#hcGrad)" />
+        <path d="M12 45h19l8-17 11 36 10-26 5 7h23" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </symbol>
+    </defs>
+  </svg>
+
+  <div class="viewport">
+    <div class="stage">
+
+      <!-- ================= HEADER ================= -->
+      <header class="topbar">
+        <a href="/" class="brand">
+          <svg class="brand-icon" aria-hidden="true">
+            <use href="#hcLogo" />
+          </svg>
+          <div class="brand-text">
+            <h1>HeartCare <span>AI</span></h1>
+            <p>Smarter Insights. Healthier Hearts.</p>
+          </div>
+        </a>
+
+        <nav class="nav" aria-label="Main">
+          <a href="/" class="nav-link nav-home">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2.8 1.8 12h2.9v8.2h5.3v-5.8h4v5.8h5.3V12h2.9z" />
+            </svg>
+            Home
+          </a>
+          <a href="/prediction" class="nav-link nav-pred is-active" aria-current="page">
+            <svg viewBox="0 0 100 90" aria-hidden="true">
+              <use href="#hcLogo" />
+            </svg>
+            Prediction
+          </a>
+        </nav>
+      </header>
+
+      <!-- ================= FORM CARD ================= -->
+      <main class="card">
+        <svg class="card-icon" aria-hidden="true">
+          <use href="#hcLogo" />
+        </svg>
+        <h2 class="card-title">Heart Disease <span>Prediction</span></h2>
+        <p class="card-sub">Enter the patient's clinical information below.</p>
+
+        <form class="form-grid" action="/predict" method="POST" autocomplete="off">
+
+          <div class="field">
+            <label for="age">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="7.5" r="4" />
+                <path d="M4 21v-1.5C4 16 7.5 14 12 14s8 2 8 5.5V21z" />
+              </svg>
+              Age (years)
+            </label>
+            <input class="has-doc-icon" type="number" id="age" name="age" placeholder="Enter age" min="1" max="120"
+              required>
+          </div>
+
+          <div class="field">
+            <label for="sex">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="10" cy="14.5" r="4.5" />
+                <path d="M13.2 11.3 20 4.5M15 4.5h5v5M10 19v3M8 21h4" />
+              </svg>
+              Sex
+            </label>
+            <select id="sex" name="sex" required>
+              <option value="" selected disabled>Select</option>
+              <option value="1">Male</option>
+              <option value="0">Female</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="cp">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 20.5S4 15.5 4 10a4.3 4.3 0 0 1 8-2.2A4.3 4.3 0 0 1 20 10c0 5.5-8 10.5-8 10.5z" />
+                <path d="M7 11.5h2.5l1.5-2.5 2 4 1.5-1.5H17" />
+              </svg>
+              Chest Pain Type
+            </label>
+            <select id="cp" name="cp" required>
+              <option value="" selected disabled>Select</option>
+              <option value="0">Typical Angina</option>
+              <option value="1">Atypical Angina</option>
+              <option value="2">Non-anginal Pain</option>
+              <option value="3">Asymptomatic</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="trestbps">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="5.5" y="2.5" width="13" height="19" rx="3.5" />
+                <circle cx="12" cy="10" r="3" />
+                <path d="M12 14.5V17" />
+              </svg>
+              Resting Blood Pressure (mm Hg)
+            </label>
+            <input type="number" id="trestbps" name="trestbps" placeholder="Enter value" required>
+          </div>
+
+          <div class="field">
+            <label for="chol">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2.5C9 7.5 5.8 10.7 5.8 15a6.2 6.2 0 0 0 12.4 0c0-4.3-3.2-7.5-6.2-12.5z" />
+              </svg>
+              Cholesterol (mg/dl)
+            </label>
+            <input type="number" id="chol" name="chol" placeholder="Enter value" required>
+          </div>
+
+          <div class="field">
+            <label for="fbs">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2.5 20 7v10l-8 4.5L4 17V7z" />
+                <path d="M12 8c-1.8 2.4-3 3.7-3 5.4a3 3 0 0 0 6 0C15 11.7 13.8 10.4 12 8z" />
+              </svg>
+              Fasting Blood Sugar &gt; 120 mg/dl?
+            </label>
+            <select id="fbs" name="fbs" required>
+              <option value="" selected disabled>Select</option>
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="restecg">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M2 12.5h4.5l2.5-7 4 14 2.5-7H22" />
+              </svg>
+              Resting ECG
+            </label>
+            <select id="restecg" name="restecg" required>
+              <option value="" selected disabled>Select</option>
+              <option value="0">Normal</option>
+              <option value="1">ST-T Wave Abnormality</option>
+              <option value="2">Left Ventricular Hypertrophy</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="thalach">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 20.5S4 15.5 4 10a4.3 4.3 0 0 1 8-2.2A4.3 4.3 0 0 1 20 10c0 5.5-8 10.5-8 10.5z" />
+                <path d="M8.5 11h2l1-2 2 4 1-2h2" />
+              </svg>
+              Maximum Heart Rate
+            </label>
+            <input type="number" id="thalach" name="thalach" placeholder="Enter value" required>
+          </div>
+
+          <div class="field">
+            <label for="exang">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="14.5" cy="4.5" r="2" />
+                <path d="M8.5 21.5l3-6-3-3 2.5-5.5 4 2 3 3M5.5 12.5l3-3M12 15.5l4 2v4" />
+              </svg>
+              Exercise-induced Angina
+            </label>
+            <select id="exang" name="exang" required>
+              <option value="" selected disabled>Select</option>
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="oldpeak">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 3v18h18" />
+                <path d="M7 15.5l4-5 3 3 6-7" />
+                <path d="M16 6.5h4v4" />
+              </svg>
+              Oldpeak
+            </label>
+            <input type="number" step="0.1" id="oldpeak" name="oldpeak" placeholder="Enter value" required>
+          </div>
+
+          <div class="field">
+            <label for="slope">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 4 3 20h18z" />
+                <path d="M8 16.5l4-3 4 3" />
+              </svg>
+              ST Slope
+            </label>
+            <select id="slope" name="slope" required>
+              <option value="" selected disabled>Select</option>
+              <option value="0">Upsloping</option>
+              <option value="1">Flat</option>
+              <option value="2">Downsloping</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="ca">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="9" y="3" width="6" height="6" rx="1.5" />
+                <rect x="3" y="14" width="6" height="6" rx="1.5" />
+                <rect x="15" y="14" width="6" height="6" rx="1.5" />
+                <path d="M12 9v2.5M6 14v-2.5h12V14" />
+              </svg>
+              Major Vessels (0-3)
+            </label>
+            <select id="ca" name="ca" required>
+              <option value="" selected disabled>Select</option>
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </div>
+
+          <div class="field field-full">
+            <label for="thal">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2.5C9 7.5 5.8 10.7 5.8 15a6.2 6.2 0 0 0 12.4 0c0-4.3-3.2-7.5-6.2-12.5z" />
+              </svg>
+              Thalassemia Result
+            </label>
+            <select id="thal" name="thal" required>
+              <option value="" selected disabled>Select</option>
+              <option value="1">Normal</option>
+              <option value="2">Fixed Defect</option>
+              <option value="3">Reversible Defect</option>
+            </select>
+          </div>
+
+          <button type="submit" class="predict-btn">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 21.5S3 16 3 9.8A4.8 4.8 0 0 1 12 7.3a4.8 4.8 0 0 1 9 2.5C21 16 12 21.5 12 21.5z"
+                fill="#fff" />
+              <path d="M5.5 12h3.3l1.5-3 3 6 1.5-3h3.2" fill="none" stroke="#e8114b" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            Predict Heart Disease Risk
+          </button>
+        </form>
+      </main>
+
+      <!-- ================= RIGHT INFO ================= -->
+      <aside class="info" aria-label="About this tool">
+        <section class="info-item info-a">
+          <span class="icon-big" aria-hidden="true"><i><svg viewBox="0 0 100 90">
+                <path
+                  d="M50 87C21 64 3 46 3 27 3 13 14 3 27 3c10 0 18 6 23 15C55 9 63 3 73 3c13 0 24 10 24 24 0 19-18 37-47 60z"
+                  fill="#fff" />
+                <path d="M12 45h19l8-17 11 36 10-26 5 7h23" fill="none" stroke="#e8114b" stroke-width="6"
+                  stroke-linecap="round" stroke-linejoin="round" />
+              </svg></i></span>
+          <h3>Better Data<br>for Healthier Lives</h3>
+          <p class="lead">Our AI model analyzes key<br>health indicators to provide<br>insights into your heart
+            health<br>risk.</p>
+        </section>
+
+        <section class="info-item info-b">
+          <span class="icon-small" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M9.5 3.5A3 3 0 0 0 6.5 6.5a3.2 3.2 0 0 0-2.3 5.3 3.3 3.3 0 0 0 2.3 5.2 3 3 0 0 0 3 3.5V3.5zM14.5 3.5a3 3 0 0 1 3 3 3.2 3.2 0 0 1 2.3 5.3 3.3 3.3 0 0 1-2.3 5.2 3 3 0 0 1-3 3.5V3.5z" />
+              <path d="M6.5 9.5h3M14.5 9.5h3M6.5 14h3M14.5 14h3" />
+            </svg>
+          </span>
+          <h3>Machine Learning</h3>
+          <p>Powered by a trained<br>logistic regression model</p>
+        </section>
+
+        <section class="info-item info-c">
+          <span class="icon-small" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 2.8 20 6v6c0 4.8-3.3 8-8 9.2C7.3 20 4 16.8 4 12V6z" />
+              <path d="M8.3 12l2.7 2.7 4.7-5" />
+            </svg>
+          </span>
+          <h3>Secure &amp; Private</h3>
+          <p>Your data is safe with us</p>
+        </section>
+
+        <section class="info-item info-d">
+          <span class="icon-small" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M2 9.5 12 4.5l10 5-10 5z" />
+              <path d="M6 12v4.5c0 1.7 2.7 3 6 3s6-1.3 6-3V12" />
+              <path d="M22 9.5v6" />
+            </svg>
+          </span>
+          <h3>Educational Purpose</h3>
+          <p>Not a medical diagnosis.</p>
+        </section>
+      </aside>
+
+      <p class="disclaimer">Educational project only. This form does not connect to a real medical system and does not
+        provide a medical diagnosis.</p>
+
+    </div>
+  </div>
+
+  {% if result or error %}
+  <div class="result-overlay" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+    <div class="result-box {% if error %}is-error{% elif 'no heart' in result %}is-ok{% else %}is-risk{% endif %}">
+      {% if error %}
+      <h2 id="resultTitle">Something went wrong</h2>
+      <p class="result-text">{{ error }}</p>
+      {% else %}
+      <h2 id="resultTitle">Prediction Result</h2>
+      <p class="result-text">{{ result }}</p>
+      {% if probability is not none %}
+      <p class="result-prob">Model confidence: <strong>{{ probability }}%</strong></p>
+      {% endif %}
+      <p class="result-note">Educational project only. This is not a medical diagnosis.</p>
+      {% endif %}
+      <a href="/prediction" class="result-btn">Check another patient</a>
+    </div>
+  </div>
+  {% endif %}
+
+</body>
+
+</html>
